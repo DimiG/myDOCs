@@ -156,7 +156,7 @@ The [Arch Linux installation][archinst] described on [official WEB site][archins
 
 ### License  
 
-This code has been written by ©2019 DimiG  
+This text has been written by ©2019 DimiG
 
 [archlnx]:https://www.archlinux.org
 [archinst]:https://wiki.archlinux.org/index.php/installation_guide
