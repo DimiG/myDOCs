@@ -7,11 +7,13 @@ I have noticed that instructions are often fragmentary and I have to spend hours
 File descriptions
 -----------------
 
-* `ArchMBP`: [Arch Linux][archlnx] installation procedure (step by step) for Mac Book Pro (MBP). Not complete yet.  
+* `ArchEeePC_MBRlvm`: [Arch Linux][archlnx] installation procedure (step by step) for [EeePC 900][eeepc] netbook computer line from [Asus][asus], and a part of the [Asus Eee][eeepc] product family. At the time of its introduction in late **2007**, it was noted for its combination of a lightweight, Linux-based operating system, solid-state drive ([SSD][ssd]), and relatively low cost. [LVM][lvm] install on [BIOS][bios] based system.  
 
-* `ArchEeePC`: [Arch Linux][archlnx] installation procedure (step by step) for [EeePC 900][eeepc] netbook computer line from [Asus][asus], and a part of the [Asus Eee][eeepc] product family. At the time of its introduction in late **2007**, it was noted for its combination of a lightweight, Linux-based operating system, solid-state drive ([SSD][ssd]), and relatively low cost. Not complete yet.  
+* `ArchMBP_UEFIlvm`: [Arch Linux][archlnx] installation procedure (step by step) for Mac Book Pro (MBP). [LVM][lvm] install on [UEFI][uefi] based system.  
 
-* `Gentoo`: [Gentoo][gentoo] installation procedure (step by step) for PC platform or [virtual machine][virtualmachine] (VM). The official documentation is located [HERE][gentoobook]. Not complete yet.  
+* `ArchMBP_UEFIstd`: [Arch Linux][archlnx] installation procedure (step by step) for Mac Book Pro (MBP). Standard install on [UEFI][uefi] based system.  
+
+* `Gentoo_GPTstd`: [Gentoo][gentoo] installation procedure (step by step) for PC platform or [virtual machine][virtualmachine] (VM). The official documentation is located [HERE][gentoobook]. Standard install on [BIOS][bios] based system.  
 
 * `All Documents`:  
    **Note:** The `HowTo's` installations process was tested by me on real **HARDWARE**. The texts may contain BUGs and may NOT always behave as expected. My instructions may not be appropriate for your equipment or hardware. You were warned ;).  
@@ -31,3 +33,6 @@ This text has been written by ©2020 DimiG
 [gentoo]:https://www.gentoo.org/
 [gentoobook]:https://wiki.gentoo.org/wiki/Handbook:AMD64
 [virtualmachine]:https://en.wikipedia.org/wiki/Virtual_machine
+[lvm]:https://en.wikipedia.org/wiki/Logical_Volume_Manager_(Linux)
+[uefi]:https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface
+[bios]:https://en.wikipedia.org/wiki/BIOS
