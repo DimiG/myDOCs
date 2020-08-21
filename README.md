@@ -15,6 +15,8 @@ File descriptions
 
 * `Gentoo_GPTstd`: [Gentoo][gentoo] installation procedure (step by step) for PC platform or [virtual machine][virtualmachine] (VM). The official documentation is located [HERE][gentoobook]. Standard install on [BIOS][bios] based system.  
 
+* `Gentoo_GPTlvm`: [Gentoo][gentoo] installation procedure (step by step) for PC platform or [virtual machine][virtualmachine] (VM). The official documentation is located [HERE][gentoobook]. [LVM][lvm] install on [BIOS][bios] based system.  
+
 * `All Documents`:  
    **Note:** The `HowTo's` installations process was tested by me on real **HARDWARE**. The texts may contain BUGs and may NOT always behave as expected. My instructions may not be appropriate for your equipment or hardware. You were warned ;).  
    ***Requires :*** The necessary hardware described in `HowTo` files.  
