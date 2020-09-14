@@ -17,6 +17,8 @@ File descriptions
 
 * `Gentoo_GPTlvm`: [Gentoo][gentoo] installation procedure (step by step) for PC platform or [virtual machine][virtualmachine] (VM). The official documentation is located [HERE][gentoobook]. [LVM][lvm] install on [BIOS][bios] based system.  
 
+* `Gentoo_GPTlvmSysD`: [Gentoo][gentoo] installation procedure (step by step) for PC platform or [virtual machine][virtualmachine] (VM). The official documentation is located [HERE][gentoobook]. [LVM][lvm] install with [SystemD][systemd] as `init` system.  
+
 * `All Documents`:  
    **Note:** The `HowTo's` installations process was tested by me on real **HARDWARE**. The texts may contain BUGs and may NOT always behave as expected. My instructions may not be appropriate for your equipment or hardware. You were warned ;).  
    ***Requires :*** The necessary hardware described in `HowTo` files.  
@@ -38,3 +40,4 @@ This text has been written by ©2020 DimiG
 [lvm]:https://en.wikipedia.org/wiki/Logical_Volume_Manager_(Linux)
 [uefi]:https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface
 [bios]:https://en.wikipedia.org/wiki/BIOS
+[systemd]:https://en.wikipedia.org/wiki/Systemd
