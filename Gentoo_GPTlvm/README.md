@@ -26,7 +26,8 @@ The [systemd][systemd] variant of [Gentoo][gentoo] is NOT possible to install at
 
 #### General Installation procedure (LVM install on [GPT][guid]):  
 
- 1.  Check you hard drive configuration by `lsblk -f` command. Be careful and DON'T format the partition with important data. YOU WERE WARNED!  
+ 1.  Check you hard drive configuration by `lsblk -f` command.  
+ Be careful and DON'T format the partition with important data. **YOU WERE WARNED**!  
  Based on official documentation the standard partitioning scheme for [LVM][lvm] is:  
  ```
  /dev/sda1 (bootloader) 2M   BIOS boot partition
@@ -72,6 +73,7 @@ The [systemd][systemd] variant of [Gentoo][gentoo] is NOT possible to install at
  # mkfs.ext4 /dev/vg01/rootfs
  ```
  ( **NOTE**: First for `Boot` and the second for `Root` )  
+
  11. Activate the `SWAP` logical partition by:  
  ```
  # mkswap /dev/vg01/swap
@@ -95,6 +97,7 @@ The [systemd][systemd] variant of [Gentoo][gentoo] is NOT possible to install at
  # tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
  ```
  ( **NOTE**: You can remove downloaded archive by: `rm /stage3-*.tar.*` )  
+
  13. Configuring compile options by:  
  ```
  # vim /mnt/gentoo/etc/portage/make.conf
@@ -105,6 +108,7 @@ The [systemd][systemd] variant of [Gentoo][gentoo] is NOT possible to install at
  MAKEOPTS="-j4"
  ```
  ( **NOTE**: Read [THIS][makeopts] article also. )  
+
  14. Cause `mirrorselect` is absent on `System Rescue CD` we will do it manually. Official information about mirrors are [HERE][gentoomirrors]. Add into `/mnt/gentoo/etc/portage/make.conf` below the mirrors specific for your country. For `RU` it will be:  
  ```
  GENTOO_MIRRORS="https://mirror.yandex.ru/gentoo-distfiles/ https://gentoo-mirror.alexxy.name/"
@@ -120,6 +124,7 @@ The [systemd][systemd] variant of [Gentoo][gentoo] is NOT possible to install at
  # cp --dereference /etc/resolv.conf /mnt/gentoo/etc/
  ```
  ( **NOTE**: If you abort the installation you can start over from this step. )  
+
  17. Mounting the necessary file systems by.  
  ```
  # mount --types proc /proc /mnt/gentoo/proc
@@ -173,6 +178,7 @@ The [systemd][systemd] variant of [Gentoo][gentoo] is NOT possible to install at
  # emerge --ask --verbose --update --deep --newuse @world
  ```
  ( **NOTE**: It may TAKE A LOT OF TIME depends on your hardware. You can skip it now. )  
+
  24. Set the `Timezone`. For `RU/Moscow` it will be:  
  ```
  # echo "Europe/Moscow" > /etc/timezone
@@ -216,6 +222,7 @@ The [systemd][systemd] variant of [Gentoo][gentoo] is NOT possible to install at
  # make menuconfig
  ```
  ( **NOTE**: For correct Kernel `LVM` configuration follow the [LVM official instruction][gentoolvm]. )  
+
  33. You can configure Kernel manually which is most effective way. Anyway, setup `genkernel` for future use. See below.  
  ```
  # emerge -a sys-kernel/genkernel
@@ -233,11 +240,13 @@ The [systemd][systemd] variant of [Gentoo][gentoo] is NOT possible to install at
  # make -j4 && make modules_install && make install
  ```
  ( **NOTE**: `-j4` for four CPU cores processor. )  
+
  35. Create `initramfs` by:  
  ```
  # genkernel --lvm --install initramfs
  ```
  ( **NOTE**: Check if `initramfs` was created by: `ls -la /boot` )  
+
  36. Add `hostname` into `/etc/conf.d/hostname`:  
  ```
  # Set the hostname variable to the selected host name
@@ -309,11 +318,13 @@ The [systemd][systemd] variant of [Gentoo][gentoo] is NOT possible to install at
  # vim /etc/default/grub
  ```
  ( **NOTE**: Add `GRUB_CMDLINE_LINUX_DEFAULT="dolvm"` )  
+
  51. Then generate the `Grub 2` configuration file by:  
  ```
  # grub-mkconfig -o /boot/grub/grub.cfg
  ```
  ( **NOTE**: Ignore the `WARNINGS: /run/lvm/lvmetad.socket: connect failed` )  
+
  52. Setup almost complete. Reboot now:  
  ```
  # exit

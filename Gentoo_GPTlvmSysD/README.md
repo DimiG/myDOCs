@@ -30,8 +30,8 @@ The [System Rescue CD][sysrescuecd] is [Arch Linux][archlnx] based **live CD** w
 
 #### General Installation procedure (SystemD LVM install on [GPT][guid]):  
 
- 1.  Check you hard drive configuration by `lsblk -f` command. **Be careful and DO NOT format the partition with important data**.  
- **YOU WERE WARNED**!  
+ 1.  Check you hard drive configuration by `lsblk -f` command.  
+ Be careful and DO NOT format the partition with important data. **YOU WERE WARNED**!  
  Based on official documentation the standard partitioning scheme for [LVM][lvm] is:  
  ```
  /dev/sda1 (bootloader) 2M   BIOS boot partition
@@ -39,6 +39,7 @@ The [System Rescue CD][sysrescuecd] is [Arch Linux][archlnx] based **live CD** w
  /dev/sda3 LVM          MAX  LVM partition
  ```
  ( **NOTE**: If you plan to use the `SWAP` partition on your system better place it outside [LVM][lvm] cause I had problems with boot with [SystemD][systemd] enabled. )  
+
  2.  Run the: `# parted -a optimal /dev/sda` for `sda` hard drive (**name depends on your system**).  
  3.  Clean up the disk and make `GPT` label by: `(parted) mklabel gpt`.  
  4.  Setup the UNIT by: `(parted) unit mib`  
@@ -57,6 +58,7 @@ The [System Rescue CD][sysrescuecd] is [Arch Linux][archlnx] based **live CD** w
  (parted) set 4 lvm on
  ```
  ( **NOTE**:  The `SWAP` partition size depends on your system `RAM`. Look [HERE][swapsize] for your reference. I will use `2Gb` here.)  
+
  6.  Physical volumes can be created / initialized with the `pvcreate` command:  
  ```
  # pvcreate /dev/sda4
@@ -80,6 +82,7 @@ The [System Rescue CD][sysrescuecd] is [Arch Linux][archlnx] based **live CD** w
  # mkfs.ext4 /dev/vg01/rootfs
  ```
  ( **NOTE**: First for `BOOT` and the second for `ROOT` )  
+
  11. Activate the `SWAP` logical partition by:  
  ```
  # mkswap /dev/sda3
@@ -103,6 +106,7 @@ The [System Rescue CD][sysrescuecd] is [Arch Linux][archlnx] based **live CD** w
  # tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
  ```
  ( **NOTE**: You can remove now the downloaded archive by: `rm /stage3-*.tar.*` )  
+
  16. Configuring compile options by:  
  ```
  # vim /mnt/gentoo/etc/portage/make.conf
@@ -113,6 +117,7 @@ The [System Rescue CD][sysrescuecd] is [Arch Linux][archlnx] based **live CD** w
  MAKEOPTS="-j4"
  ```
  ( **NOTE**: Read [THIS][makeopts] article also. )  
+
  17. Cause `mirrorselect` is absent on `System Rescue CD` we will do it manually. Official information about mirrors are [HERE][gentoomirrors]. Add into `/mnt/gentoo/etc/portage/make.conf` below the mirrors specific for your country. For `RU` it will be:  
  ```
  GENTOO_MIRRORS="https://mirror.yandex.ru/gentoo-distfiles/ https://gentoo-mirror.alexxy.name/"
@@ -128,6 +133,7 @@ The [System Rescue CD][sysrescuecd] is [Arch Linux][archlnx] based **live CD** w
  # cp -L /etc/resolv.conf /mnt/gentoo/etc/
  ```
  ( **NOTE**: If you abort the installation you can start over from this step! )  
+
  20. Mounting the necessary file systems by:  
  ```
  # mount --types proc /proc /mnt/gentoo/proc
@@ -181,6 +187,7 @@ The [System Rescue CD][sysrescuecd] is [Arch Linux][archlnx] based **live CD** w
  # emerge -avuDN @world
  ```
  ( **NOTE**: It may TAKE A LOT OF TIME depends on your hardware. *You can skip it now*. )  
+
  27. Set the `Timezone`. For `RU/Moscow` it will be:  
  ```
  # echo "Europe/Moscow" > /etc/timezone
@@ -226,6 +233,7 @@ The [System Rescue CD][sysrescuecd] is [Arch Linux][archlnx] based **live CD** w
  # make menuconfig
  ```
  ( **NOTE**: For correct Kernel `LVM` and `SystemD` configuration follow the [LVM][gentoolvm] and [SystemD][systemd] official instructions. )  
+
  **Enabling LVM**  
  ```
  Device Drivers  --->
@@ -260,11 +268,13 @@ The [System Rescue CD][sysrescuecd] is [Arch Linux][archlnx] based **live CD** w
  # make -j4 && make modules_install && make install
  ```
  ( **NOTE**: `-j4` for four CPU cores processor. )  
+
  38. Create `initramfs` by:  
  ```
  # genkernel --lvm --install initramfs
  ```
  ( **NOTE**: Check if `initramfs` was created by: `ls -la /boot`. )  
+
  39. Setup `Grub 2` boot loader ( for `sda` in our case ):  
  ```
  # echo 'sys-boot/grub:2 device-mapper' >> /etc/portage/package.use/package.use
@@ -272,16 +282,19 @@ The [System Rescue CD][sysrescuecd] is [Arch Linux][archlnx] based **live CD** w
  # grub-install /dev/sda
  ```
  ( **NOTE**: `Grub 2` should be compiled with device-mapper support. )  
+
  40. Change variables in the `Grub 2` configuration file `/etc/default/grub` by:  
  ```
  # vim /etc/default/grub
  ```
  ( **NOTE**: Un-comment `GRUB_CMDLINE_LINUX_DEFAULT="dolvm"` and `GRUB_CMDLINE_LINUX="init=/lib/systemd/systemd"`. )  
+
  41. Then generate the `Grub 2` configuration file by:  
  ```
  # grub-mkconfig -o /boot/grub/grub.cfg
  ```
  ( **NOTE**: Ignore the `WARNINGS: /run/lvm/lvmetad.socket: connect failed`. )  
+
  42. For network configuration create this file `/etc/systemd/network/50-dhcp.network` and add:  
  ```
  cat <<EOF > /etc/systemd/network/50-dhcp.network
@@ -293,6 +306,7 @@ The [System Rescue CD][sysrescuecd] is [Arch Linux][archlnx] based **live CD** w
  EOF
  ```
  ( **NOTE**: Correct the `Name` according to your network interface name. )  
+
  43. Install `sudo` by:  
  ```
  # emerge -av sudo
@@ -304,6 +318,7 @@ The [System Rescue CD][sysrescuecd] is [Arch Linux][archlnx] based **live CD** w
  # passwd username
  ```
  ( **NOTE**: Don't forget to unblock the wheel group in **SUDO** `config` file, check if user can access root account and lock the `root` account by: `sudo passwd -l root`. DO NOT login as `root` )  
+
  45. Let's exit the `chroot` environment and enter `systemd` name space by:  
  ```
  # exit

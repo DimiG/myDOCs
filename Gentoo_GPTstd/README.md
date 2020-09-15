@@ -21,7 +21,8 @@ To install [Gentoo][gentoo] you can use official [minimal installation CD][gento
 
 #### General Installation procedure (standard install on [GPT][guid]):  
 
- 1.  Check you hard drive configuration by `# lsblk -f` command. Be careful and DON'T format the partition with important data. YOU WERE WARNED!  
+ 1.  Check you hard drive configuration by `# lsblk -f` command.  
+ Be careful and DON'T format the partition with important data. **YOU WERE WARNED**!  
  Based on official documentation the standard partitioning scheme is:  
  ```
  /dev/sda1 (bootloader) 2M   BIOS boot partition
